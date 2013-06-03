@@ -16,3 +16,4 @@ dist
 .settings
 .target
 bin
+.cache
