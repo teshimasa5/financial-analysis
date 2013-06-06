@@ -10,6 +10,10 @@ object Stocks extends Controller {
     Ok(html.stocks.index());
   }
 
+  def detail = Action {
+    Ok(html.stocks.detail());
+  }
+
   def history = Action {
     Ok(html.stocks.history());
   }

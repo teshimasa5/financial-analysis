@@ -6,25 +6,36 @@ import play.api.Play.current
 import anorm._
 import anorm.SqlParser._
 
-case class Company(id: Pk[Long] = NotAssigned, name: String)
+case class Company(code: Pk[Long] = NotAssigned
+                  , name: String
+                  , name_en: String
+                  , phone_number: String)
 
 object Company {
+
+  // -- Parsers
 
   /**
    * Parse a Company from a ResultSet
    */
   val simple = {
-    get[Pk[Long]]("company.id") ~
-    get[String]("company.name") map {
-      case id~name => Company(id, name)
+    get[Pk[Long]]("company.code") ~
+    get[String]("company.name") ~
+    get[String]("company.name_en") ~
+    get[String]("phone_number") map {
+      case code~name~name_en~phone_number => Company(code, name, name_en, phone_number)
     }
   }
 
+  // -- Queries
+
   /**
-   * Construct the Map[String,String] needed to fill a select options set.
+   * Retrieve a Company from the code.
    */
-  def options: Seq[(String,String)] = DB.withConnection { implicit connection =>
-    SQL("select * from company order by name").as(Company.simple *).map(c => c.id.toString -> c.name)
+  def findById(code: Long): Option[Company] = {
+    DB.withConnection { implicit connection =>
+      SQL("select * from company where code = {code}").on('code -> code).as(Company.simple.singleOpt)
+    }
   }
 
 }
