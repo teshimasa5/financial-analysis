@@ -10,5 +10,6 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Stocks
 GET     /stocks                     controllers.Stocks.index
+GET     /stocks/list                controllers.Stocks.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
 GET     /stocks/detail              controllers.Stocks.detail
 GET     /stocks/history             controllers.Stocks.history

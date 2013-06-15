@@ -38,5 +38,49 @@ object Company {
     }
   }
 
+  /**
+   * Return a page of (Company).
+   *
+   * @param page Page to display
+   * @param pageSize Number of computers per page
+   * @param orderBy Company property used for sorting
+   * @param filter Filter applied on the name column
+   */
+  def list(page: Int = 0, pageSize: Int = 10, orderBy: Int = 1, filter: String = "%"): Page[(Company)] = {
+
+    val offest = pageSize * page
+
+    DB.withConnection { implicit connection =>
+
+      val companies = SQL(
+        """
+          select *
+          from company
+          where company.name like {filter}
+          order by {orderBy} nulls last
+          limit {pageSize} offset {offset}
+        """
+      ).on(
+        'pageSize -> pageSize
+        , 'offset -> offest
+        , 'filter -> filter
+        , 'orderBy -> orderBy
+      ).as(Company.simple *)
+
+      val totalRows = SQL(
+        """
+          select count(*)
+          from company
+          where company.name like {filter}
+        """
+      ).on(
+        'filter -> filter
+      ).as(scalar[Long].single)
+
+      Page(companies, page, offest, totalRows)
+
+    }
+  }
+
 }
 

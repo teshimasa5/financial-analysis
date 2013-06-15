@@ -77,3 +77,44 @@ body {
 .phone_template, .profile_template {
     display: none;
 }
+
+table.companies em {
+    color: #aaa;
+}
+
+table.companies .col3, table.companies .col4 {
+    width: 30%;
+    min-width: 300px;
+}
+
+table.companies .col5 {
+    width: 10%;
+    min-width: 100px;
+}
+
+table.companies .header a {
+}
+
+#actions {
+    position: relative;
+}
+
+#actions #add {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#pagination {
+    position: relative;
+}
+
+#pagination ul {
+    position: absolute;
+    right: 0;
+}
+
+#pagination ul .current a {
+    color: #666;
+}
+
