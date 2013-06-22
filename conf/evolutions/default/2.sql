@@ -23,7 +23,6 @@ insert into company (code, name, name_en, phone_number) values (1783, '(株)Ａ�
 insert into company (code, name, name_en, phone_number) values (7408, '(株)ジャムコ', 'ＪＡＭＣＯ　ＣＯＲＰＯＲＡＴＩＯＮ', '0422-31-9111');
 insert into company (code, name, name_en, phone_number) values (3252, '日本商業開発(株)', 'Ｎｉｐｐｏｎ　Ｃｏｍｍｅｒｃｉａｌ　Ｄｅｖｅｌｏｐｍｅｎｔ　Ｃｏ．，Ｌｔｄ．', '06-4706-7501');
 
-
 # --- !Downs
 
 delete from company;
